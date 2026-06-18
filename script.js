@@ -37,10 +37,57 @@ window.addEventListener('scroll', () => {
 });
 
 // Demo login form (front-end only, no backend)
-const loginForm = document.getElementById('loginForm');
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+  getAuth,
+  signInWithEmailAndPassword
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyA72tsq38PAgCc2gTf-L3KJEx_p50ZuxG4",
+  authDomain: "webp-4686b.firebaseapp.com",
+  projectId: "webp-4686b",
+  storageBucket: "webp-4686b.firebasestorage.app",
+  messagingSenderId: "265714369549",
+  appId: "1:265714369549:web:86d4b015358a6621d6c144",
+  measurementId: "G-DJ1723CXR4"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+const loginForm = document.getElementById("loginForm");
+
 if (loginForm) {
-  loginForm.addEventListener('submit', (e) => {
+  loginForm.addEventListener("submit", async (e) => {
     e.preventDefault();
-    alert('This is a demo form — connect it to a backend to enable real login.');
+
+    const email =
+      document.getElementById("email").value;
+
+    const password =
+      document.getElementById("password").value;
+
+    try {
+      const userCredential =
+        await signInWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+
+      if (!userCredential.user.emailVerified) {
+        alert("Please verify your email first.");
+        return;
+      }
+
+      alert("Login Successful!");
+
+    } catch (error) {
+      alert(error.message);
+    }
+  });
+}
   });
 }
