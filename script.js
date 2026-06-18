@@ -45,7 +45,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyA72tsq38PAgCc2gTf-L3KJEx_p50ZuxG4",
+  apiKey: "",
   authDomain: "webp-4686b.firebaseapp.com",
   projectId: "webp-4686b",
   storageBucket: "webp-4686b.firebasestorage.app",
